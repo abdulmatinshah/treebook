@@ -1,5 +1,10 @@
 Treebook::Application.routes.draw do
-  devise_for :users
+  get ':id', to: "profiles#show"
+  devise_for :users  do
+    get "register", :to => "devise/registrations#new"
+    get "sign_in", :to => "devise/sessions#new"
+    get "sign_out", :to => "devise/sessions#destroy"
+  end
   resources :statuses
   root to:"statuses#index"
   # The priority is based upon order of creation: first created -> highest priority.
