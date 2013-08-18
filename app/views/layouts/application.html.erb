@@ -17,7 +17,7 @@
         <ul class="nav pull-right">
          
             <% if user_signed_in? %>
-             <li><%= link_to current_user.email, edit_user_registration_path %></li>
+             <li><%= link_to current_user.full_name, edit_user_registration_path %></li>
               <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
               <% else %>
               <li><%= link_to 'Sign in', new_user_session_path %></li>
@@ -29,12 +29,19 @@
    </div> 
   </div>
   <div class="container">
-  <% if notice || alert %>
-    <p class="notice"><%= notice %></p>
- <p class="alert"><%= alert %></p>
-  <% end %>
- 
+     <div class="row">
+       <% if flash.any? %>
+        <% flash.each do |type, msg|  %>
+          <div class="alert <%= flash_class type %>">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= msg %>
+          </div>
+        <% end %>
+       <% end %>  <!-- end row -->
+     </div><!-- end container -->
+  </div>
 <%= yield %>
-</div>   
+</div> 
+
 </body>
 </html>
