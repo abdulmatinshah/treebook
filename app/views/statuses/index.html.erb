@@ -3,15 +3,21 @@
  </div>
  <%= link_to 'Post a New Status', new_status_path, class: 'btn btn-success' %>
 <% @statuses.each do |status| %>
-<div class="status">
-<strong><%= status.user.email %></strong>
-<p><%= status.content  %></p>
-<div class="meta">
-  <%= link_to time_ago_in_words(status.created_at) + ' ago', status %>  
-  <span class="admin">
-   | <%= link_to 'Edit', edit_status_path(status) %> |
-    <%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </span>
+<div class="status row">
+  <div class="span1">
+    <%#= gravatar_image(current_user.email) %>
+    <%= image_tag current_user.gravatar_url %>
+  </div>
+  <div class="span7">
+  <strong><%= status.user.full_name %></strong>
+  <p><%= status.content  %></p>
+  <div class="meta">
+    <%= link_to time_ago_in_words(status.created_at) + ' ago', status %>  
+    <span class="admin">
+     | <%= link_to 'Edit', edit_status_path(status) %> |
+      <%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </span>
+  </div>
 </div>
 </div>
 <% end %>
